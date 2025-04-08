@@ -21,8 +21,11 @@ default_sentence = "South Africa is known for its breathtaking landscapes and vi
 user_input = st.text_area("✍️ Enter your sentence here:", default_sentence)
 
 if user_input:
-    wordcloud = WordCloud(width=800, height=400, background_color='white').generate(user_input)
-    st.image(wordcloud.to_array(), caption="Word Cloud of Your Input", use_container_width=True)
+    try:
+        wordcloud = WordCloud(width=800, height=400, background_color='white').generate(user_input)
+        st.image(wordcloud.to_array(), caption="Word Cloud of Your Input", use_container_width=True)
+    except ValueError:
+        st.warning("⚠️ Not enough words to generate a Word Cloud. Please enter a longer or more meaningful sentence.")
 
 if st.button("🔍 Analyze Sentiment"):
     user_vector = vectorizer.transform([user_input])
