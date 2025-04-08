@@ -5,12 +5,20 @@ from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+from sklearn.feature_extraction.text import TfidfVectorizer
+vectorizer = TfidfVectorizer()
+X = vectorizer.fit_transform(text_data)  # your cleaned South Africa Wikipedia text
+
+# Save after fitting
+import joblib
+joblib.dump(vectorizer, "tfidf_vectorizer.pkl")
+
 # Load model and vectorizer for South Africa
 model = joblib.load("random_forest_sentiment_model.pkl")
 vectorizer = joblib.load("tfidf_vectorizer.pkl")
 
 # App UI
-st.title("🇿🇦 South Africa Wikipedia Sentiment Analysis")
+st.title(" South Africa Wikipedia Sentiment Analysis")
 st.subheader("Powered by Random Forest Classifier")
 
 st.markdown("""
@@ -26,7 +34,7 @@ if user_input.strip():
     try:
         wordcloud = WordCloud(width=800, height=400, background_color='white').generate(user_input)
         image = wordcloud.to_image()  # Use PIL image
-        st.image(image, caption="Word Cloud of Your Input", use_container_width=True)
+st.image(image, caption="Word Cloud of Your Input", use_column_width=True)
     except Exception as e:
         st.warning(f"⚠️ Unable to generate Word Cloud. Reason: {str(e)}")
 
