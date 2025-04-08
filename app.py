@@ -28,15 +28,16 @@ This app analyzes sentiment based on a model trained on Wikipedia content for So
 default_sentence = "South Africa is known for its breathtaking landscapes and vibrant cultural heritage."
 user_input = st.text_area("✍️ Enter your sentence here:", default_sentence)
 
-from PIL import Image  # Add this at the top of your file if not already present
+from PIL import Image  # make sure this is at the top
 
 if user_input.strip():
     try:
         wordcloud = WordCloud(width=800, height=400, background_color='white').generate(user_input)
-        image = wordcloud.to_image()  # Use PIL image
-st.image(image, caption="Word Cloud of Your Input", use_column_width=True)
+        image = wordcloud.to_image()  # Convert to PIL image
+        st.image(image, caption="Word Cloud of Your Input", use_column_width=True)
     except Exception as e:
         st.warning(f"⚠️ Unable to generate Word Cloud. Reason: {str(e)}")
+
 
     except ValueError:
         st.warning("⚠️ Not enough words to generate a Word Cloud. Please enter a longer or more meaningful sentence.")
