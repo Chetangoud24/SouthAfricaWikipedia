@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Load model and vectorizer for South Africa
-model = joblib.load("south_africa_random_forest_model.pkl")
-vectorizer = joblib.load("south_africa_tfidf_vectorizer.pkl")
+model = joblib.load("random_forest_sentiment_model.pkl")
+vectorizer = joblib.load("tfidf_vectorizer.pkl")
 
 # App UI
 st.title("🇿🇦 South Africa Wikipedia Sentiment Analysis")
