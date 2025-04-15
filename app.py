@@ -17,8 +17,8 @@ except FileNotFoundError:
     st.stop()
 
 # UI
-st.title(" South Africa Wikipedia Sentiment Analysis")
-st.subheader("Powered by Random Forest Classifier")
+st.title("🇿🇦 South Africa Wikipedia Sentiment Analysis")
+st.subheader("📡 Powered by Random Forest Classifier")
 
 st.markdown("""
 This app analyzes sentiment based on a model trained on Wikipedia content for South Africa.
@@ -40,13 +40,17 @@ if st.button("🔍 Analyze Sentiment"):
     with st.spinner("Analyzing..."):
         # TF-IDF + Model Prediction
         user_vector = vectorizer.transform([user_input])
-        prediction = model.predict(user_vector)[0]
         proba = model.predict_proba(user_vector)[0]
+        prediction = proba.argmax()  # Use highest probability class
 
         sentiment_label = "Positive" if prediction == 1 else "Negative"
         sentiment_color = "green" if prediction == 1 else "red"
 
         st.markdown(f"### 🎯 **Predicted Sentiment:** :{sentiment_color}[{sentiment_label}]")
+
+        # Show raw probabilities
+        st.write(f"- **Negative Probability:** {proba[0]:.2f}")
+        st.write(f"- **Positive Probability:** {proba[1]:.2f}")
 
         # Probability Bar Chart
         st.markdown("#### 📊 Prediction Confidence")
