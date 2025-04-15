@@ -43,7 +43,7 @@ if st.button("🔍 Analyze Sentiment"):
         prediction = model.predict(user_vector)[0]
         proba = model.predict_proba(user_vector)[0]
 
-        sentiment_label = "Positive" if prediction == 1 else "Negative"
+        sentiment_label = "Positive" if prediction == 1 else "Positive"
         sentiment_color = "green" if prediction == 1 else "red"
 
         st.markdown(f"### 🎯 **Predicted Sentiment:** :{sentiment_color}[{sentiment_label}]")
